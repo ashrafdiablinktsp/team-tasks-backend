@@ -1,0 +1,1 @@
+{"version":3,"file":"task.routes.js","sourceRoot":"","sources":["../../../src/modules/tasks/task.routes.ts"],"names":[],"mappings":";;AAAA,qCAAiC;AACjC,MAAM,MAAM,GAAG,IAAA,gBAAM,GAAE,CAAC;AAExB,MAAM,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE;IAC3B,GAAG,CAAC,IAAI,CAAC,WAAW,CAAC,CAAC;AACxB,CAAC,CAAC,CAAC;AAEH,kBAAe,MAAM,CAAC"}

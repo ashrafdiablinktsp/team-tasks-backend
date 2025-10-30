@@ -1,0 +1,97 @@
+input AssignTaskInput {
+  assignedTo: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+input CreateTaskInput {
+  assignedTo: String
+  description: String
+  title: String!
+}
+
+input CreateUserInput {
+  email: String!
+  jobDescription: String
+  name: String!
+  password: String!
+  position: String
+  role: String
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  assignTask(id: ID!, input: AssignTaskInput!): Task!
+  createTask(input: CreateTaskInput!): Task!
+  createUser(input: CreateUserInput!): User!
+  deleteTask(id: ID!): Boolean!
+  deleteUser(id: ID!): Boolean!
+  login(input: LoginInput!): AuthPayload!
+  register(input: RegisterInput!): AuthPayload!
+  updateTask(id: ID!, input: UpdateTaskInput!): Task!
+  updateUser(id: ID!, input: UpdateUserInput!): User
+}
+
+type Query {
+  me: User
+  task(id: ID!): Task
+  tasks: [Task!]!
+  user(id: ID!): User
+  users: [User!]!
+}
+
+input RegisterInput {
+  email: String!
+  jobDescription: String
+  name: String!
+  password: String!
+  position: String
+}
+
+type Task {
+  assignedTo: String
+  assignedToUser: User
+  createdAt: String!
+  description: String
+  id: ID!
+  status: TaskStatus!
+  title: String!
+  updatedAt: String!
+}
+
+enum TaskStatus {
+  COMPLETED
+  IN_PROGRESS
+  PENDING
+}
+
+input UpdateTaskInput {
+  assignedTo: String
+  description: String
+  status: TaskStatus
+  title: String
+}
+
+input UpdateUserInput {
+  jobDescription: String
+  name: String
+  position: String
+}
+
+type User {
+  createdAt: String!
+  email: String!
+  id: ID!
+  jobDescription: String
+  name: String!
+  position: String
+  role: String!
+  updatedAt: String!
+}
