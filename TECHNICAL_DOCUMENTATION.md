@@ -540,7 +540,7 @@ app.use(errorHandler); // Centralized error handling
 - Add new middleware (rate limiting, caching)
 
 #### **3. Liskov Substitution Principle (LSP)**
-Subtypes must be substitutable for base types:
+Subtypes must be substitutable for base types (Subclasses must be usable without breaking the parent’s behavior):
 
 ```typescript
 // ✅ All custom errors are substitutable for Error
@@ -632,6 +632,8 @@ modules/
 ### Design Patterns Used
 
 #### **1. Data Access Layer (DAL) Pattern**
+Separates database logic from the rest of the app.
+Business logic never talks directly to the database — it talks to the DAL layer.
 ```typescript
 // Encapsulates all database operations
 export const userDAL = {
@@ -645,6 +647,8 @@ export const userDAL = {
 **Benefits**: Single source of truth for DB operations, easy to test, swap implementations.
 
 #### **2. Service Layer Pattern**
+Holds business logic and rules, separate from controllers and database code.
+Controllers call services, services call repositories.
 ```typescript
 // Business logic orchestration
 export class TaskService {
@@ -655,6 +659,8 @@ export class TaskService {
 **Benefits**: Reusable business logic, shared between REST and GraphQL.
 
 #### **3. Factory Pattern**
+Creates objects without exposing the creation logic.
+Used when you want to decide which class to create at runtime.
 ```typescript
 // Database factory
 export const connectDB = async () => {
@@ -667,6 +673,7 @@ export const connectDB = async () => {
 **Benefits**: Controlled object creation, lazy initialization.
 
 #### **4. Singleton Pattern**
+Ensures only one instance of a class exists in the entire app.
 ```typescript
 // Database singleton
 let db: Database | null = null;
@@ -679,6 +686,7 @@ export const getDB = (): Database => {
 **Benefits**: Single database connection shared across app.
 
 #### **5. Middleware Pattern**
+Functions that run between the request and the final handler.
 ```typescript
 // Express middleware chain
 app.use(cors());
@@ -689,6 +697,8 @@ app.use(errorHandler);
 **Benefits**: Cross-cutting concerns, composable request processing.
 
 #### **6. Dependency Injection (DI)**
+Instead of creating dependencies inside a class, you inject them from outside.
+Reduces tight coupling.
 ```typescript
 // Context injection in GraphQL
 context: ({ req }) => {
@@ -705,6 +715,7 @@ tasks: async (_parent, _args, context: GraphQLContext) => {
 **Benefits**: Testability, flexibility, loose coupling.
 
 #### **7. Strategy Pattern**
+Allows you to define different algorithms and switch between them at runtime.
 ```typescript
 // Authorization strategies based on role
 static async getAllTasks(role: string, userId: string) {
